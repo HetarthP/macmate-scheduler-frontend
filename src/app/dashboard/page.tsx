@@ -74,7 +74,7 @@ export default function Dashboard() {
       if (!token) return router.push("/login");
 
       try {
-        const res = await fetch("http://localhost:8081/auth/protected", {
+        const res = await fetch("https://macmate-scheduler-backend.onrender.com/auth/protected", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const text = await res.text();
@@ -95,7 +95,7 @@ export default function Dashboard() {
 
   const fetchItems = async (token: string) => {
     try {
-      const res = await fetch("http://localhost:8081/schedule", {
+      const res = await fetch("https://macmate-scheduler-backend.onrender.com/schedule", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -175,7 +175,7 @@ export default function Dashboard() {
     if (!token) return;
 
     try {
-      const res = await fetch(`http://localhost:8081/schedule/delete/${eventToDelete.id}`, {
+      const res = await fetch(`https://macmate-scheduler-backend.onrender.com/schedule/delete/${eventToDelete.id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
