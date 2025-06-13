@@ -10,32 +10,31 @@ export default function LoginPage() {
   const [response, setResponse] = useState('');
 
   const handleLogin = async () => {
-  try {
-    const res = await fetch('https://macmate-scheduler-backend.onrender.com/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch('https://macmate-scheduler-backend.onrender.com/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await res.json(); // Expecting { token: "..." }
+      const token = await res.text(); // 🔁 Get plain text token, not JSON
 
-    if (res.ok && data.token && !data.token.startsWith('❌')) {
-      localStorage.setItem('jwt', data.token); // ✅ Just the raw token
-      console.log('🔐 JWT:', data.token);
+      if (res.ok && token && !token.startsWith('❌')) {
+        localStorage.setItem('jwt', token);
+        console.log('🔐 JWT:', token);
 
-      setResponse('✅ Login successful!');
-      router.push('/dashboard');
-    } else {
-      localStorage.removeItem('jwt');
-      console.log('❌ Login failed:', data);
-      setResponse('❌ Login failed: ' + (data.message || 'Unknown error'));
+        setResponse('✅ Login successful!');
+        router.push('/dashboard');
+      } else {
+        localStorage.removeItem('jwt');
+        console.log('❌ Login failed:', token);
+        setResponse('❌ Login failed: ' + token);
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setResponse('❌ Something went wrong.');
     }
-  } catch (err) {
-    console.error('Login error:', err);
-    setResponse('❌ Something went wrong.');
-  }
-};
-
+  };
 
   return (
     <div style={{
