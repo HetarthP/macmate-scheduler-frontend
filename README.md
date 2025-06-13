@@ -4,7 +4,8 @@
 
 ## 🚀 Live Demo
 
-👉 [macmate.vercel.app](https://macmate.vercel.app)
+👉 [macmate.vercel.app](https://macmate.vercel.app
+/register)
 
 ## 🧰 Tech Stack
 
