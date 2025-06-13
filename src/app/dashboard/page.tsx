@@ -124,8 +124,9 @@ export default function Dashboard() {
     if (!token) return;
 
     const url = selectedEvent
-      ? `http://localhost:8081/schedule/update/${selectedEvent.id}`
-      : "http://localhost:8081/schedule/add";
+  ? `https://macmate-scheduler-backend.onrender.com/schedule/update/${selectedEvent.id}`
+  : "https://macmate-scheduler-backend.onrender.com/schedule/add";
+
     const method = selectedEvent ? "PUT" : "POST";
 
     try {
